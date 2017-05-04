@@ -1,7 +1,5 @@
 #include "Engine.h"
 
-//#include "Engine.h"
-
 void Engine::initSDL()
 {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_AUDIO) < 0) 
@@ -20,11 +18,13 @@ void Engine::initSDL()
 		else
 		{
 			rootSurface = SDL_GetWindowSurface(rootWindow);
-			printf("SDL was initialized successfully!");
+			printf("SDL was initialized successfully!\n");			
 		}
 	}
 }
 
+
+//handle input
 void Engine::handleEvents() 
 {
 	SDL_Event e;
@@ -46,13 +46,24 @@ void Engine::handleEvents()
 	}
 }
 
-Engine::Engine() : rootSurface(NULL), rootWindow(NULL), gameOver(false)
+//render to root window
+void Engine::render() 
+{
+	SDL_FillRect(rootSurface, NULL, SDL_MapRGB(rootSurface->format, 0, 0, 0));
+
+	SDL_UpdateWindowSurface(rootWindow);
+}
+
+Engine::Engine() : rootSurface(NULL), rootWindow(NULL), gameOver(false), asciiImage(NULL)
 {
 	initSDL();
+
+	tileSize = { 0, 0, 8, 8 };
 }
 
 Engine::~Engine()
 {
+	SDL_FreeSurface(asciiImage);
 	SDL_FreeSurface(rootSurface);
 	SDL_DestroyWindow(rootWindow);
 	SDL_Quit();
