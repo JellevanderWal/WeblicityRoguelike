@@ -51,6 +51,8 @@ void Engine::render()
 {
 	SDL_FillRect(rootSurface, NULL, SDL_MapRGB(rootSurface->format, 0, 0, 0));
 
+	ascii->printAscii(0, 0, 64, rootSurface);
+
 	SDL_UpdateWindowSurface(rootWindow);
 }
 
@@ -58,11 +60,12 @@ Engine::Engine() : rootSurface(NULL), rootWindow(NULL), gameOver(false), asciiIm
 {
 	initSDL();
 
-	tileSize = { 0, 0, 8, 8 };
+	ascii = new Ascii();
 }
 
 Engine::~Engine()
 {
+	delete ascii;
 	SDL_FreeSurface(asciiImage);
 	SDL_FreeSurface(rootSurface);
 	SDL_DestroyWindow(rootWindow);

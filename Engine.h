@@ -5,6 +5,10 @@
 #define TITLE "Weblicty Roguelike"
 #define ROOTWIDTH 512
 #define ROOTHEIGHT 256
+#ifndef TILESIZE
+#include "Ascii.h" 
+#endif //TILESIZE
+
 
 class Engine
 {
@@ -19,4 +23,5 @@ private:
 	SDL_Surface *rootSurface;
 	void initSDL();
 	SDL_Surface *asciiImage;
+	Ascii* ascii;
 };
