@@ -7,6 +7,7 @@
 #define ROOTHEIGHT 256
 #ifndef TILESIZE
 #include "Ascii.h" 
+#include "Player.h"
 #endif //TILESIZE
 
 
@@ -23,5 +24,6 @@ private:
 	SDL_Surface *rootSurface;
 	void initSDL();
 	SDL_Surface *asciiImage;
-	Ascii* ascii;
+	Player* player;
+	Ascii *ascii;
 };

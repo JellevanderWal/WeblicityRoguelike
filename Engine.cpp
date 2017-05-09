@@ -51,7 +51,7 @@ void Engine::render()
 {
 	SDL_FillRect(rootSurface, NULL, SDL_MapRGB(rootSurface->format, 0, 0, 0));
 
-	ascii->printAscii(0, 0, 64, rootSurface);
+	player->Render(rootSurface);
 
 	SDL_UpdateWindowSurface(rootWindow);
 }
@@ -61,10 +61,15 @@ Engine::Engine() : rootSurface(NULL), rootWindow(NULL), gameOver(false), asciiIm
 	initSDL();
 
 	ascii = new Ascii();
+
+	player = new Player();
+	player->setAscii(ascii);
+	printf("%c\n", (char)player->ch);
 }
 
 Engine::~Engine()
 {
+	delete player;
 	delete ascii;
 	SDL_FreeSurface(asciiImage);
 	SDL_FreeSurface(rootSurface);
